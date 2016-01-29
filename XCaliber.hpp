@@ -11,15 +11,17 @@ private:
 
 
 public:
-	XCaliber();
-	~XCaliber();
-	void robotInit();
-	void autonomousInit();
-	void autonomousPeriodic();
-	void teleopInt();
-	void teleopPeriodic();
+	//XCaliber();
+	//~XCaliber();
+	void RobotInit();
+	void AutonomousInit();
+	void AutonomousPeriodic();
+	void TeleopInit();
+	void TeleopPeriodic();
 
 };
+
+START_ROBOT_CLASS(XCaliber);
 
 
 

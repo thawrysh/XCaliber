@@ -8,6 +8,7 @@ private:
 	CANTalon *RightFront;
 	CANTalon *LeftRear;
 	CANTalon *LeftFront;
+	Solenoid* GearShifter;
 
 	RobotDrive *SpeedBase;
 	Encoder*leftEnc;
@@ -15,6 +16,8 @@ private:
 	Timer *StopWatch;
 	Joystick *JS;
 	double distance;
+
+	bool Shift;
 
 public:
 

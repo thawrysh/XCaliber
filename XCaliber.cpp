@@ -9,18 +9,21 @@ int AutoMode;
 
 //}
 
-XCaliber::XCaliber(){
+//XCaliber::XCaliber(){
+
+
+//}
+
+void XCaliber::RobotInit(){
+	printf("What's up");
+
 	AutoMode=0;
-	initialize();
+		initialize();
+		c->Start();
 
 }
 
-void XCaliber::robotInit(){
-
-
-}
-
-void XCaliber::autonomousInit(){
+void XCaliber::AutonomousInit(){
 
 	if(SmartDashboard::GetBoolean("DB/Button 1", false)) {
 		  	   AutoMode = 1;
@@ -41,17 +44,18 @@ void XCaliber::autonomousInit(){
 
 }
 
-void XCaliber::autonomousPeriodic(){
+void XCaliber::AutonomousPeriodic(){
 	myDrive->Auto();
 }
 
-void XCaliber::teleopInt(){
+void XCaliber::TeleopInit(){
 	//define some values here; maybe reset encoders
 }
 
-void XCaliber::teleopPeriodic(){
+void XCaliber::TeleopPeriodic(){
 	myDrive->TeleOp();
 }
 
-XCaliber::~XCaliber(){
-}
+//XCaliber::~XCaliber(){
+//}
+

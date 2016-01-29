@@ -12,9 +12,13 @@
 #include "Drive.hpp"
 
 Drive* myDrive;
+Compressor* c;
 
 inline void initialize(){
 	myDrive = new Drive();
+	c = new Compressor();
+	printf("What's up");
+
 }
 
 

@@ -41,11 +41,13 @@ void XCaliber::AutonomousInit(){
 			   AutoMode = 0;
 			   SmartDashboard::PutString("DB/String 0", "Auto Mode 0");
 	       }
+	myDrive->Auto();
+
 
 }
 
 void XCaliber::AutonomousPeriodic(){
-	myDrive->Auto();
+
 }
 
 void XCaliber::TeleopInit(){
@@ -54,6 +56,7 @@ void XCaliber::TeleopInit(){
 
 void XCaliber::TeleopPeriodic(){
 	myDrive->TeleOp();
+	myLauncher->TeleOp();
 }
 
 //XCaliber::~XCaliber(){

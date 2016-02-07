@@ -2,7 +2,7 @@
 #include "Drive.hpp"
 #include "XCaliberShared.hpp"
 
-#define diameter 7.75
+#define diameter 4
 #define pi 3.14159265359
 
 Drive::Drive(){
@@ -29,45 +29,49 @@ Drive::Drive(){
 
     distance=0;
     Shift = false;
-    rightEnc = new Encoder(0, 1, true, Encoder::EncodingType::k4X);
-    leftEnc = new Encoder(2, 3, true, Encoder::EncodingType::k4X);
+    rightEnc = new Encoder(0, 1, false, Encoder::EncodingType::k4X);
+    leftEnc = new Encoder(2, 3, false, Encoder::EncodingType::k4X);
 	//rightEnc->SetMaxPeriod(0.1);
 	rightEnc ->SetMinRate(10);
-	rightEnc ->SetDistancePerPulse(diameter * pi / 256);
+	circum = diameter * pi;
+	rightEnc ->SetDistancePerPulse(0.1);
+
 	//leftEnc->SetMaxPeriod(0.1);
 	leftEnc ->SetMinRate(10);
-	leftEnc ->SetDistancePerPulse(diameter * pi / 256);
+	leftEnc ->SetDistancePerPulse(circum / 256);
 
 }
 
 void Drive::Auto(){
-StopWatch->Start();
+//	StopWatch->Start();
+//
+//	switch(AutoMode){
+//		case 1:
+//			while(distance <= circum){
+//				SpeedBase->SetLeftRightMotorOutputs(0.8,0.8);
+//				//using CANTalons allowed for aspeed control signature allowing me to use Set() still with Cantalons
+//				//SpeedBase->SetLeftRightMotorOutputs(0.8,0.85);
+//				distance = rightEnc -> GetDistance();
+//				printf("distance: %f\n", distance);
+//			}
+//			SpeedBase->SetLeftRightMotorOutputs(0,0);
+//			Wait(100);
+//
+//			break;
+//		case 2:
+//			Wait(15);
+//			break;
+//		case 3:
+//			Wait(15);
+//			break;
+//		case 4:
+//			Wait(15);
+//			break;
+//		default:
+//			 printf("No Autonomous Chosen");
+//			 break;
+//	}
 
-switch(AutoMode){
-	case 1:
-	    while(distance <= 15){
-	    	//using CANTalons allowed for aspeed control signature allowing me to use Set() still with Cantalons
-	    	//SpeedBase->SetLeftRightMotorOutputs(0.8,0.85);
-            distance = rightEnc -> GetDistance();
-	    }
-		break;
-	case 2:
-		Wait(15);
-		break;
-	case 3:
-		Wait(15);
-		break;
-	case 4:
-		Wait(15);
-		break;
-	default:
-		 printf("No Autonomous Chosen");
-		 break;
-}
-while(StopWatch->Get() < 15.0){
-	Wait(.001);
-
-}
 
 }
 
@@ -87,7 +91,8 @@ Shift = JS->GetRawButton(2);	// Shift - safety button
 	//	printf("shift false S1.7\n");
 		GearShifter->Set(false);
 	}
-
+ 	 	 	 distance = rightEnc->GetDistance();
+ 			printf("distance: %f\n", distance);
 
 
 }

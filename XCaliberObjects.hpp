@@ -10,12 +10,16 @@
 
 #include "WPILib.h"
 #include "Drive.hpp"
+#include "Launcher.hpp"
+
 
 Drive* myDrive;
+Launcher* myLauncher;
 Compressor* c;
 
 inline void initialize(){
 	myDrive = new Drive();
+	myLauncher=new Launcher();
 	c = new Compressor();
 	printf("What's up");
 

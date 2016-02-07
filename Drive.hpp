@@ -16,6 +16,7 @@ private:
 	Timer *StopWatch;
 	Joystick *JS;
 	double distance;
+	double circum;
 
 	bool Shift;
 

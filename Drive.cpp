@@ -75,6 +75,15 @@ void Drive::Auto(){
 
 }
 
+void Drive::Disabled(){
+	LeftFront->Set(0);
+	LeftRear->Set(0);
+	RightFront->Set(0);
+	RightRear->Set(0);
+
+
+}
+
 void Drive::TeleOp(){
 
 SpeedBase ->ArcadeDrive(JS, true);

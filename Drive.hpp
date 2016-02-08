@@ -24,6 +24,7 @@ public:
 
 	void Auto();
 	void TeleOp();
+	void Disabled();
 	Drive();
 	~Drive();
 

@@ -18,6 +18,7 @@ public:
 	void AutonomousPeriodic();
 	void TeleopInit();
 	void TeleopPeriodic();
+	void DisabledPeriodic();
 
 };
 

@@ -2,6 +2,7 @@
 #include "Drive.hpp"
 #include "XCaliberShared.hpp"
 
+
 #define diameter 4
 #define pi 3.14159265359
 
@@ -23,7 +24,7 @@ Drive::Drive(){
 
 
 
-    JS = new Joystick(0);
+   JS = new Joystick(0);
 
     StopWatch = new Timer;
 
@@ -34,7 +35,7 @@ Drive::Drive(){
 	//rightEnc->SetMaxPeriod(0.1);
 	rightEnc ->SetMinRate(10);
 	circum = diameter * pi;
-	rightEnc ->SetDistancePerPulse(0.1);
+	rightEnc ->SetDistancePerPulse(circum / 256);
 
 	//leftEnc->SetMaxPeriod(0.1);
 	leftEnc ->SetMinRate(10);
@@ -43,52 +44,61 @@ Drive::Drive(){
 }
 
 void Drive::Auto(){
-//	StopWatch->Start();
-//
-//	switch(AutoMode){
-//		case 1:
-//			while(distance <= circum){
-//				SpeedBase->SetLeftRightMotorOutputs(0.8,0.8);
-//				//using CANTalons allowed for aspeed control signature allowing me to use Set() still with Cantalons
-//				//SpeedBase->SetLeftRightMotorOutputs(0.8,0.85);
-//				distance = rightEnc -> GetDistance();
-//				printf("distance: %f\n", distance);
-//			}
-//			SpeedBase->SetLeftRightMotorOutputs(0,0);
-//			Wait(100);
-//
-//			break;
-//		case 2:
-//			Wait(15);
-//			break;
-//		case 3:
-//			Wait(15);
-//			break;
-//		case 4:
-//			Wait(15);
-//			break;
-//		default:
-//			 printf("No Autonomous Chosen");
-//			 break;
-//	}
+	StopWatch->Start();
+
+	switch(AutoMode){
+		case 1:
+			//while(abs(rightEnc->Get()) <= 256){
+			rightEnc->Reset();
+			//SpeedBase->SetLeftRightMotorOutputs(0.3,0.3);
+			LeftFront->Set(0.3);
+					LeftRear->Set(0.3);
+					RightFront->Set(0.3);
+					RightRear->Set(0.3);
+				//using CANTalons allowed for aspeed control signature allowing me to use Set() still with Cantalons
+				//SpeedBase->SetLeftRightMotorOutputs(0.8,0.85);
+				//distance = rightEnc -> Count();
+				//printf("distance: %f\n", rightEnc->Get());
+
+			//}
+			//SpeedBase->SetLeftRightMotorOutputs(0,0);
+			//Wait(100);
+
+			break;
+		case 2:
+			Wait(15);
+			break;
+		case 3:
+			Wait(15);
+			break;
+		case 4:
+			Wait(15);
+			break;
+		default:
+			 printf("No Autonomous Chosen");
+			 break;
+	}
 
 
 }
 
-void Drive::Disabled(){
-	LeftFront->Set(0);
-	LeftRear->Set(0);
-	RightFront->Set(0);
-	RightRear->Set(0);
-
-
-}
+/*void Drive::AutoPeriodic(){
+	printf("%i\n", rightEnc->GetRaw());
+	if(abs(rightEnc->GetRaw()) > 256){
+		//SpeedBase->SetLeftRightMotorOutputs(0,0);
+		LeftFront->Set(0);
+		LeftRear->Set(0);
+		RightFront->Set(0);
+		RightRear->Set(0);
+	}
+}*/
 
 void Drive::TeleOp(){
-
+//SpeedBase->SetSafetyEnabled(true);
 SpeedBase ->ArcadeDrive(JS, true);
+Wait(0.005);
 
-Shift = JS->GetRawButton(2);	// Shift - safety button
+Shift = JS->GetRawButton(1);	// Shift - safety button
 
  if (Shift) {
  		// Engage pnuematic shifter
@@ -100,8 +110,8 @@ Shift = JS->GetRawButton(2);	// Shift - safety button
 	//	printf("shift false S1.7\n");
 		GearShifter->Set(false);
 	}
- 	 	 	 distance = rightEnc->GetDistance();
- 			printf("distance: %f\n", distance);
+ 	 	 	// distance = rightEnc->GetDistance();
+// 			printf("distance: %f\n", distance);
 
 
 }

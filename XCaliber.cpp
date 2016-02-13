@@ -46,22 +46,20 @@ void XCaliber::AutonomousInit(){
 
 }
 
-void XCaliber::AutonomousPeriodic(){
-
-}
+/*void XCaliber::AutonomousPeriodic(){
+	myDrive->AutoPeriodic();
+}*/
 
 void XCaliber::TeleopInit(){
 	//define some values here; maybe reset encoders
 }
 
-void XCaliber::DisabledPeriodic(){
-	myDrive->Disabled();
-}
-
 void XCaliber::TeleopPeriodic(){
 	myDrive->TeleOp();
 	myLauncher->TeleOp();
+
 }
+
 
 //XCaliber::~XCaliber(){
 //}

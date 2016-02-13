@@ -13,16 +13,23 @@ class Launcher{
 private:
 
 	bool fire;
+	bool test;
 	CANTalon *launchWheel;
+	Talon *lAct;
 	Solenoid *puncher;
+	Relay *spike;
 	//Solenoid *position;
-	Joystick *driveStick;
+	Joystick* JS;
+	Timer* Stopwatch;
+	Joystick* Buttons;
 
 
 public:
 
 	void Auto();
 	void TeleOp();
+	void Feeder();
+	void Act();
 	Launcher();
 	~Launcher();
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "WPILib.h"
-//#include "XCaliberShared.hpp"
+#include "XCaliberShared.hpp"
 
 class Drive{
 private:
@@ -24,7 +24,7 @@ public:
 
 	void Auto();
 	void TeleOp();
-	void Disabled();
+	void AutoPeriodic();
 	Drive();
 	~Drive();
 

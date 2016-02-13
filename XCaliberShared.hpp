@@ -18,4 +18,7 @@ extern
 
 int AutoMode;
 
+
+
+
 #endif /* XCALIBERSHARED_HPP_ */

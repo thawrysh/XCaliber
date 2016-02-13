@@ -10,10 +10,14 @@
 Launcher::Launcher() {
 
 	fire=false;
-	driveStick= new Joystick(0);
+	Buttons = new Joystick(1);
+	JS= new Joystick(0);
 	launchWheel = new CANTalon(5);
-	puncher = new Solenoid(1);
+	lAct = new Talon(0);
+	puncher = new Solenoid(2);
+	spike = new Relay(0);
 	//position = new Solenoid(2);
+	Stopwatch = new Timer();
 
 }
 
@@ -21,21 +25,66 @@ void Launcher::Auto(){
 
 }
 
+void Launcher::Feeder(){
+	if(Buttons->GetRawButton(9)){
+		spike->Set(Relay::Value::kForward);
+
+	}else if(Buttons->GetRawButton(10)){
+		spike->Set(Relay::Value::kReverse);
+	}else{
+		spike->Set(Relay::Value::kOff);
+	}
+
+
+}
+
+void Launcher:: Act(){
+printf("Linear Act\n\n");
+lAct->Set(-Buttons->GetRawAxis(1));
+}
+
 
 void Launcher::TeleOp(){
 
-	fire=driveStick->GetRawButton(2);
+	fire=JS->GetRawButton(2);
 
-	if(fire){
-		launchWheel->Set(1);
-		Wait(1);
+	Feeder();
+	Act();
+
+
+
+	if(fire && Buttons->GetRawButton(1)){
+		launchWheel->Set(-1.0);
+		Stopwatch->Start();
+		printf("Hey the wheels are running\n");
+		printf("%f\n\n", Stopwatch->Get());
+
+		if(Stopwatch->Get() > 1){
 		puncher->Set(true);
-		Wait(1);
+		printf("Hey the puncher activated");
+
+		}
+		Wait(0.001);
+	}else if(fire && !(Buttons->GetRawButton(1))) {
+				launchWheel->Set(-0.65);
+				Stopwatch->Start();
+
+				if(Stopwatch->Get() > 1){
+				puncher->Set(true);
+				printf("Hey the puncher activated");
+
+				}
+				Wait(0.001);
 	}else{
-		puncher->Set(false);
+		Stopwatch->Reset();
+        puncher->Set(false);
+        Wait(0.001);
 		launchWheel->Set(0);
+        Wait(0.001);
 	}
-	}
+
+
+}
 
 
 

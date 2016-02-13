@@ -15,10 +15,10 @@ public:
 	//~XCaliber();
 	void RobotInit();
 	void AutonomousInit();
-	void AutonomousPeriodic();
+	//void AutonomousPeriodic();
 	void TeleopInit();
 	void TeleopPeriodic();
-	void DisabledPeriodic();
+	void TeleopContinuous();
 
 };
 

@@ -4,21 +4,24 @@
 
 
 
+
 class XCaliber : public IterativeRobot{
 private:
-	//Task* Drive;
-
-
+	Joystick* Buttons;
+	Timer* StopWatch;
 
 public:
-	//XCaliber();
-	//~XCaliber();
+	XCaliber();
 	void RobotInit();
 	void AutonomousInit();
 	//void AutonomousPeriodic();
 	void TeleopInit();
 	void TeleopPeriodic();
 	void TeleopContinuous();
+<<<<<<< Updated upstream
+=======
+	~XCaliber();
+>>>>>>> Stashed changes
 
 };
 

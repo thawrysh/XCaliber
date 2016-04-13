@@ -16,6 +16,7 @@ private:
 	bool test;
 	CANTalon *launchWheel;
 	Talon *lAct;
+<<<<<<< Updated upstream
 	Solenoid *puncher;
 	Relay *spike;
 	//Solenoid *position;
@@ -23,6 +24,14 @@ private:
 	Timer* Stopwatch;
 	Joystick* Buttons;
 
+=======
+	AnalogPotentiometer *lFeedback;
+	Solenoid *puncher;
+	Relay *spike;
+	Joystick* JS;
+	Timer* launchStopwatch;
+	Joystick* Buttons;
+>>>>>>> Stashed changes
 
 public:
 
@@ -30,12 +39,13 @@ public:
 	void TeleOp();
 	void Feeder();
 	void Act();
+<<<<<<< Updated upstream
+=======
+	double LauncherSpeed();
+>>>>>>> Stashed changes
 	Launcher();
 	~Launcher();
 
-
 };
-
-
 
 #endif /* SRC_LAUNCHER_HPP_ */

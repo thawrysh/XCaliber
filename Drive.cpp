@@ -6,25 +6,37 @@
 #define diameter 4
 #define pi 3.14159265359
 
-Drive::Drive(){
+//extern bool AutoCondition;
+//extern double overArching;
 
-	LeftFront = new CANTalon(1);
-	LeftRear = new CANTalon(3);
-	RightFront = new CANTalon(2);
-	RightRear = new CANTalon(4);
+Drive::Drive(){
+	JS = new Joystick(0);
+	Buttons = new Joystick(1);
+
+	lowBar = new Solenoid(1);
+	LeftFront = new CANTalon(2);
+	LeftRear = new CANTalon(4);
+	RightFront = new CANTalon(1);
+	RightRear = new CANTalon(3);
 	GearShifter = new Solenoid(0);
 
 	SpeedBase=new RobotDrive(LeftFront, LeftRear, RightFront, RightRear);
+
 	SpeedBase -> SetInvertedMotor(RobotDrive::kFrontLeftMotor, true);
 	SpeedBase -> SetInvertedMotor(RobotDrive::kFrontRightMotor, true);
 	SpeedBase -> SetInvertedMotor(RobotDrive::kRearLeftMotor, true);
 	SpeedBase -> SetInvertedMotor(RobotDrive::kRearRightMotor, true);
 
+<<<<<<< Updated upstream
 
 
 
 
    JS = new Joystick(0);
+=======
+	//navX = new AnalogGyro(0);
+	//navX ->Calibrate();
+>>>>>>> Stashed changes
 
     StopWatch = new Timer;
 
@@ -44,6 +56,7 @@ Drive::Drive(){
 }
 
 void Drive::Auto(){
+<<<<<<< Updated upstream
 	StopWatch->Start();
 
 	switch(AutoMode){
@@ -78,7 +91,106 @@ void Drive::Auto(){
 			 printf("No Autonomous Chosen");
 			 break;
 	}
+=======
+>>>>>>> Stashed changes
 
+	switch(AutoMode){
+		case 1:
+			//while(abs(rightEnc->Get()) <= 256){
+			//rightEnc->Reset();
+			//printf("OVERARCHING: %f\n\n", overArching);
+			//SpeedBase->SetLeftRightMotorOutputs(0.3,0.3);
+				if(overArching < 3.0){
+				LeftFront->Set(-1.0);
+					LeftRear->Set(-1.0);
+					RightFront->Set(1.0);
+					RightRear->Set(1.0);
+				}else if(overArching >= 3.0){
+
+					LeftFront->Set(0);
+					LeftRear->Set(0);
+					RightFront->Set(0);
+					RightRear->Set(0);
+					//AutoCondition=true;
+				}
+				//using CANTalons allowed for aspeed control signature allowing me to use Set() still with Cantalons
+				//SpeedBase->SetLeftRightMotorOutputs(0.8,0.85);
+				//distance = rightEnc -> Count();
+				//printf("distance: %f\n", rightEnc->Get());
+
+			//}
+			//SpeedBase->SetLeftRightMotorOutputs(0,0);
+			//Wait(100);
+
+			break;
+		case 2:
+			if(overArching < 2.5){
+				LeftFront->Set(1.0);
+				LeftRear->Set(1.0);
+				RightFront->Set(-1.0);
+				RightRear->Set(-1.0);
+				Wait(0.001);
+			}else if(overArching >= 2.5 && overArching <9){
+				LeftFront->Set(0);
+				LeftRear->Set(0);
+				RightFront->Set(0);
+				RightRear->Set(0);
+				Wait(0.0001);
+				AutoCondition=true;
+			}else if(overArching >= 9 && overArching <= 11){
+				LeftFront->Set(-1);
+				LeftRear->Set(-1);
+				RightFront->Set(1);
+				RightRear->Set(1);
+				Wait(0.0001);
+				AutoCondition=false;
+			}else {
+				LeftFront->Set(0);
+				LeftRear->Set(0);
+				RightFront->Set(0);
+				RightRear->Set(0);
+				Wait(0.0001);
+			}
+			break;
+		case 3:
+			if(overArching < 3.0){
+
+				LeftFront->Set(1.0);
+				LeftRear->Set(1.0);
+				RightFront->Set(-1.0);
+				RightRear->Set(-1.0);
+
+			}else if(overArching >= 3.0){
+
+				LeftFront->Set(0);
+				LeftRear->Set(0);
+				RightFront->Set(0);
+				RightRear->Set(0);
+							}
+		break;
+		default:
+			 printf("No Autonomous Chosen");
+			 break;
+	}
+
+}
+
+
+/*void Drive::AutoPeriodic(){
+	printf("%i\n", rightEnc->GetRaw());
+	if(abs(rightEnc->GetRaw()) > 256){
+		//SpeedBase->SetLeftRightMotorOutputs(0,0);
+		LeftFront->Set(0);
+		LeftRear->Set(0);
+		RightFront->Set(0);
+		RightRear->Set(0);
+	}
+}*/
+
+void Drive::ObstacleOne(){
+	if(Buttons->GetRawButton(4)){
+		lowBar->Set(true);
+	}
 
 }
 
@@ -93,10 +205,17 @@ void Drive::Auto(){
 	}
 }*/
 
+<<<<<<< Updated upstream
 void Drive::TeleOp(){
 //SpeedBase->SetSafetyEnabled(true);
 SpeedBase ->ArcadeDrive(JS, true);
 Wait(0.005);
+=======
+	SpeedBase ->ArcadeDrive(JS, true);
+
+
+Wait(0.003);
+>>>>>>> Stashed changes
 
 Shift = JS->GetRawButton(1);	// Shift - safety button
 
@@ -107,14 +226,17 @@ Shift = JS->GetRawButton(1);	// Shift - safety button
 	}
 	else {
 		// Disengage pnuematic shifter
-	//	printf("shift false S1.7\n");
 		GearShifter->Set(false);
 	}
+<<<<<<< Updated upstream
  	 	 	// distance = rightEnc->GetDistance();
 // 			printf("distance: %f\n", distance);
 
+=======
+>>>>>>> Stashed changes
 
 }
 
 Drive::~Drive(){
+
 }

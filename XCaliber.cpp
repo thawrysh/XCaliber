@@ -4,27 +4,33 @@
 #include "XCaliberObjects.hpp"
 
 int AutoMode;
-
-// static void BeginDriveThread(){
-
-//}
-
-//XCaliber::XCaliber(){
+double overArching;
+bool AutoCondition;
 
 
-//}
+XCaliber::XCaliber(){
+
+	StopWatch = new Timer();
+	AutoCondition = false;
+
+
+}
 
 void XCaliber::RobotInit(){
-	printf("What's up");
 
-	AutoMode=0;
+
+		AutoMode=0;
 		initialize();
 		c->Start();
+
+
+
 
 }
 
 void XCaliber::AutonomousInit(){
-
+	StopWatch->Reset();
+	StopWatch->Start();
 	if(SmartDashboard::GetBoolean("DB/Button 1", false)) {
 		  	   AutoMode = 1;
 			   SmartDashboard::PutString("DB/String 0", "Auto Mode 1");
@@ -41,26 +47,50 @@ void XCaliber::AutonomousInit(){
 			   AutoMode = 0;
 			   SmartDashboard::PutString("DB/String 0", "Auto Mode 0");
 	       }
-	myDrive->Auto();
+
 
 
 }
 
+<<<<<<< Updated upstream
 /*void XCaliber::AutonomousPeriodic(){
 	myDrive->AutoPeriodic();
 }*/
+=======
+void XCaliber::AutonomousPeriodic(){
+	overArching = StopWatch->Get();
+	myDrive->Auto();
+	myLauncher->Auto();
+
+
+}
+>>>>>>> Stashed changes
 
 void XCaliber::TeleopInit(){
 	//define some values here; maybe reset encoders
 }
 
 void XCaliber::TeleopPeriodic(){
+
 	myDrive->TeleOp();
 	myLauncher->TeleOp();
+<<<<<<< Updated upstream
+=======
+	myLifter -> TeleOp();
+	myCamera->TeleOp();  // Comment if you do not want multiple cams
+>>>>>>> Stashed changes
 
 }
 
 
+<<<<<<< Updated upstream
 //XCaliber::~XCaliber(){
 //}
+=======
+XCaliber::~XCaliber(){
+	delete myDrive;
+	delete myLauncher;
+
+}
+>>>>>>> Stashed changes
 

@@ -27,16 +27,8 @@ Drive::Drive(){
 	SpeedBase -> SetInvertedMotor(RobotDrive::kRearLeftMotor, true);
 	SpeedBase -> SetInvertedMotor(RobotDrive::kRearRightMotor, true);
 
-<<<<<<< Updated upstream
-
-
-
-
-   JS = new Joystick(0);
-=======
 	//navX = new AnalogGyro(0);
 	//navX ->Calibrate();
->>>>>>> Stashed changes
 
     StopWatch = new Timer;
 
@@ -56,43 +48,6 @@ Drive::Drive(){
 }
 
 void Drive::Auto(){
-<<<<<<< Updated upstream
-	StopWatch->Start();
-
-	switch(AutoMode){
-		case 1:
-			//while(abs(rightEnc->Get()) <= 256){
-			rightEnc->Reset();
-			//SpeedBase->SetLeftRightMotorOutputs(0.3,0.3);
-			LeftFront->Set(0.3);
-					LeftRear->Set(0.3);
-					RightFront->Set(0.3);
-					RightRear->Set(0.3);
-				//using CANTalons allowed for aspeed control signature allowing me to use Set() still with Cantalons
-				//SpeedBase->SetLeftRightMotorOutputs(0.8,0.85);
-				//distance = rightEnc -> Count();
-				//printf("distance: %f\n", rightEnc->Get());
-
-			//}
-			//SpeedBase->SetLeftRightMotorOutputs(0,0);
-			//Wait(100);
-
-			break;
-		case 2:
-			Wait(15);
-			break;
-		case 3:
-			Wait(15);
-			break;
-		case 4:
-			Wait(15);
-			break;
-		default:
-			 printf("No Autonomous Chosen");
-			 break;
-	}
-=======
->>>>>>> Stashed changes
 
 	switch(AutoMode){
 		case 1:
@@ -194,28 +149,12 @@ void Drive::ObstacleOne(){
 
 }
 
-/*void Drive::AutoPeriodic(){
-	printf("%i\n", rightEnc->GetRaw());
-	if(abs(rightEnc->GetRaw()) > 256){
-		//SpeedBase->SetLeftRightMotorOutputs(0,0);
-		LeftFront->Set(0);
-		LeftRear->Set(0);
-		RightFront->Set(0);
-		RightRear->Set(0);
-	}
-}*/
-
-<<<<<<< Updated upstream
 void Drive::TeleOp(){
-//SpeedBase->SetSafetyEnabled(true);
-SpeedBase ->ArcadeDrive(JS, true);
-Wait(0.005);
-=======
+
 	SpeedBase ->ArcadeDrive(JS, true);
 
 
 Wait(0.003);
->>>>>>> Stashed changes
 
 Shift = JS->GetRawButton(1);	// Shift - safety button
 
@@ -228,12 +167,6 @@ Shift = JS->GetRawButton(1);	// Shift - safety button
 		// Disengage pnuematic shifter
 		GearShifter->Set(false);
 	}
-<<<<<<< Updated upstream
- 	 	 	// distance = rightEnc->GetDistance();
-// 			printf("distance: %f\n", distance);
-
-=======
->>>>>>> Stashed changes
 
 }
 

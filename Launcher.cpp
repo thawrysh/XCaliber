@@ -17,13 +17,6 @@ Launcher::Launcher() {
 	Buttons = new Joystick(1);
 	JS= new Joystick(0);
 	launchWheel = new CANTalon(5);
-<<<<<<< Updated upstream
-	lAct = new Talon(0);
-	puncher = new Solenoid(2);
-	spike = new Relay(0);
-	//position = new Solenoid(2);
-	Stopwatch = new Timer();
-=======
 	lAct = new Talon(1);
 	//old code  32.4 degrees
 	//NEW BOT 30.7
@@ -31,7 +24,6 @@ Launcher::Launcher() {
 	puncher = new Solenoid(3); //In competition it is 2
 	spike = new Relay(0);
 	launchStopwatch = new Timer();
->>>>>>> Stashed changes
 
 }
 
@@ -73,16 +65,6 @@ void Launcher::Feeder(){
 
 }
 
-<<<<<<< Updated upstream
-void Launcher::Feeder(){
-	if(Buttons->GetRawButton(9)){
-		spike->Set(Relay::Value::kForward);
-
-	}else if(Buttons->GetRawButton(10)){
-		spike->Set(Relay::Value::kReverse);
-	}else{
-		spike->Set(Relay::Value::kOff);
-=======
 void Launcher:: Act(){
 	lAct->Set(Buttons->GetRawAxis(1));
 	printf("Short Shot Value: %lf\n\n", lFeedback->Get()); //Use to find angle
@@ -100,19 +82,11 @@ void Launcher:: Act(){
 
 		}
 
->>>>>>> Stashed changes
 	}
 
 
 }
 
-<<<<<<< Updated upstream
-void Launcher:: Act(){
-printf("Linear Act\n\n");
-lAct->Set(-Buttons->GetRawAxis(1));
-}
-
-=======
 double Launcher::LauncherSpeed(){
 	if(Buttons->GetRawButton(1)){
 			return -1.0;  // .95
@@ -122,47 +96,10 @@ double Launcher::LauncherSpeed(){
 }
 
 
->>>>>>> Stashed changes
 
 void Launcher::TeleOp(){ //CHANGE FOR COMPETITION; REVERSE POLARITY OF MOTOR VALUES SO IT SHOOTS RIGHT WAY
 
 	fire=JS->GetRawButton(2);
-<<<<<<< Updated upstream
-
-	Feeder();
-	Act();
-
-
-
-	if(fire && Buttons->GetRawButton(1)){
-		launchWheel->Set(-1.0);
-		Stopwatch->Start();
-		printf("Hey the wheels are running\n");
-		printf("%f\n\n", Stopwatch->Get());
-
-		if(Stopwatch->Get() > 1){
-		puncher->Set(true);
-		printf("Hey the puncher activated");
-
-		}
-		Wait(0.001);
-	}else if(fire && !(Buttons->GetRawButton(1))) {
-				launchWheel->Set(-0.65);
-				Stopwatch->Start();
-
-				if(Stopwatch->Get() > 1){
-				puncher->Set(true);
-				printf("Hey the puncher activated");
-
-				}
-				Wait(0.001);
-	}else{
-		Stopwatch->Reset();
-        puncher->Set(false);
-        Wait(0.001);
-		launchWheel->Set(0);
-        Wait(0.001);
-=======
 
 	if(!(Buttons->GetRawButton(6))){
 		Act();
@@ -215,7 +152,6 @@ void Launcher::TeleOp(){ //CHANGE FOR COMPETITION; REVERSE POLARITY OF MOTOR VAL
 		launchStopwatch->Reset();
 
 
->>>>>>> Stashed changes
 	}
 
 

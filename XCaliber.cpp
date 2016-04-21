@@ -52,11 +52,6 @@ void XCaliber::AutonomousInit(){
 
 }
 
-<<<<<<< Updated upstream
-/*void XCaliber::AutonomousPeriodic(){
-	myDrive->AutoPeriodic();
-}*/
-=======
 void XCaliber::AutonomousPeriodic(){
 	overArching = StopWatch->Get();
 	myDrive->Auto();
@@ -64,7 +59,6 @@ void XCaliber::AutonomousPeriodic(){
 
 
 }
->>>>>>> Stashed changes
 
 void XCaliber::TeleopInit(){
 	//define some values here; maybe reset encoders
@@ -74,23 +68,15 @@ void XCaliber::TeleopPeriodic(){
 
 	myDrive->TeleOp();
 	myLauncher->TeleOp();
-<<<<<<< Updated upstream
-=======
 	myLifter -> TeleOp();
-	myCamera->TeleOp();  // Comment if you do not want multiple cams
->>>>>>> Stashed changes
+//	myCamera->TeleOp();  // Comment if you do not want multiple cams
 
 }
 
 
-<<<<<<< Updated upstream
-//XCaliber::~XCaliber(){
-//}
-=======
 XCaliber::~XCaliber(){
 	delete myDrive;
 	delete myLauncher;
 
 }
->>>>>>> Stashed changes
 

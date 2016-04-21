@@ -13,8 +13,9 @@
 class Lifter{
 private:
 
-	Talon* prop;
-	Talon* extend;
+	CANTalon* masterLifter;
+	CANTalon* followerOne;
+	CANTalon* followerTwo;
 
 	Joystick* Buttons;
 

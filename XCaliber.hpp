@@ -14,14 +14,11 @@ public:
 	XCaliber();
 	void RobotInit();
 	void AutonomousInit();
-	//void AutonomousPeriodic();
+	void AutonomousPeriodic();
 	void TeleopInit();
 	void TeleopPeriodic();
 	void TeleopContinuous();
-<<<<<<< Updated upstream
-=======
 	~XCaliber();
->>>>>>> Stashed changes
 
 };
 

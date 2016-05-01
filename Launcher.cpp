@@ -7,8 +7,9 @@
 
 #include "Launcher.hpp"
 #include "XCaliberShared.hpp"
-#define shortShot 24.81 //"14.81 is golden" -Shivang, incease by 2 degrees
+#define shortShot 13.91 //"14.81 is golden" -Shivang, incease by 2 degrees
 #define longShot 11.56
+#define autoShot 20
 //old 22.8
 //31.2
 Launcher::Launcher() {
@@ -21,7 +22,7 @@ Launcher::Launcher() {
 	//old code  32.4 degrees
 	//NEW BOT 30.7
 	lFeedback = new AnalogPotentiometer(0, 30.7,0.0); //second number full range with base (0 degrees) at lowest point
-	puncher = new Solenoid(3); //In competition it is 2
+	puncher = new Solenoid(2); //In competition it is 2
 	spike = new Relay(0);
 	launchStopwatch = new Timer();
 
@@ -29,8 +30,66 @@ Launcher::Launcher() {
 
 void Launcher::Auto(){
 
-	if(AutoCondition){
-	spike->Set(Relay::Value::kForward);
+	switch(AutoMode){
+			case 2:
+				if(overArching < 4){
+					lAct->Set(1.0 * (lFeedback->Get() - autoShot));
+					Wait(0.001);
+
+				}else if(overArching >= 4 && overArching <5){
+
+					launchWheel->Set(0.8);
+					Wait(0.001);
+
+				}else if(overArching >= 5 && overArching <8){
+
+					puncher->Set(true);
+					Wait(0.001);
+
+
+				}else{
+					launchWheel->Set(0);
+					Wait(0.001);
+					puncher->Set(false);
+
+				}
+
+
+
+
+				break;
+
+
+
+
+	//while(lFeedback->Get() != autoShot){
+		//lAct->Set(1.0 * (lFeedback->Get() - autoShot));
+		//Wait(0.001);
+					//printf("You have entered the second if=under\n\n");
+
+		//if(overArching < 6){
+		//printf("%f\n\n",overArching);
+		//launchWheel->Set(0.85);
+		//Wait(0.001);
+//unique //speed
+
+		//}else{
+
+			//launchWheel->Set(0);
+			//Wait(0.001);
+
+		//}
+
+		//if(overArching > 3 && overArching <=5 ){
+			//puncher->Set(true);
+			//Wait(0.001);
+			//printf("Hey the puncher activated");
+
+		//}else{
+			//puncher->Set(false);
+			//	}
+
+	}
 	}
 
 
@@ -50,7 +109,7 @@ void Launcher::Auto(){
 //				launchWheel->Set(0);
 //				puncher->Set(false);
 //			}*/
-}
+//}
 
 void Launcher::Feeder(){
 	if(Buttons->GetRawButton(9)){
@@ -89,9 +148,10 @@ void Launcher:: Act(){
 
 double Launcher::LauncherSpeed(){
 	if(Buttons->GetRawButton(1)){
-			return -1.0;  // .95
+			return 0.90;  // .95
+
 		}else{
-			return -0.925;
+			return 0.75;
 		}
 }
 
@@ -141,7 +201,7 @@ void Launcher::TeleOp(){ //CHANGE FOR COMPETITION; REVERSE POLARITY OF MOTOR VAL
 		launchWheel->Set(-0.9);
 		Wait(0.001);
 
-	}else if(fire && Buttons->GetRawButton(2)){
+	}else if(Buttons->GetRawButton(3) && Buttons->GetRawButton(2)){
 		puncher->Set(true);
 		Wait(0.001);
 	}else if(!fire && !Buttons->GetRawButton(2)){

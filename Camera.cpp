@@ -15,7 +15,7 @@ Camera::Camera(){
 	  JS = new Joystick(0);
 
 	 CameraServer2::GetInstance()->StartAutomaticCapture("cam0");
-     CameraServer2::GetInstance()->SetQuality(95);
+     CameraServer2::GetInstance()->SetQuality(50);
      printf("Camera starting...");
 	  //frame = NIVision->imageCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 }

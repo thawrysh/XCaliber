@@ -14,7 +14,7 @@ Lifter::Lifter(){
 
 	masterLifter = new CANTalon(21);
 	masterLifter->Set(0);
-	followerOne = new CANTalon(20);
+	followerOne = new CANTalon(23);
 	followerOne->Set(0);
 	followerTwo = new CANTalon(22);
 	followerTwo->Set(0);
@@ -28,8 +28,8 @@ Lifter::Lifter(){
 	masterLifter->ConfigPotentiometerTurns(10);
 
 	masterLifter->ConfigLimitMode(CANSpeedController::kLimitMode_SoftPositionLimits);
-	masterLifter->ConfigForwardLimit(900);
-	masterLifter->ConfigReverseLimit(100);
+	masterLifter->ConfigForwardLimit(7.8);// 8.0
+	masterLifter->ConfigReverseLimit(2.7);// 2.5
 	Buttons = new Joystick(1);
 //	Limits = new AnalogPotentiometer(1); //second number full range with base (0 degrees) at lowest point
 	LifterStopWatch = new Timer();
@@ -40,8 +40,15 @@ Lifter::Lifter(){
 }
 
 void Lifter::TeleOp(){
+if(Buttons->GetRawButton(7) && Buttons->GetRawButton(6)){
+	masterLifter->Set(-1.0);
+}else if(Buttons->GetRawButton(8) && Buttons->GetRawButton(6)){
+	masterLifter->Set(1.0);
 
-	masterLifter->Set(-1);
+}else if(Buttons->GetRawButton(6)){
+
+	masterLifter->Set(0);
+}
 //	potOut =
 	Wait(0.001);
 

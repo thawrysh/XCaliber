@@ -55,13 +55,12 @@ void Drive::Auto(){
 			//rightEnc->Reset();
 			//printf("OVERARCHING: %f\n\n", overArching);
 			//SpeedBase->SetLeftRightMotorOutputs(0.3,0.3);
-				if(overArching < 3.0){
-				LeftFront->Set(-1.0);
-					LeftRear->Set(-1.0);
-					RightFront->Set(1.0);
-					RightRear->Set(1.0);
-				}else if(overArching >= 3.0){
-
+				if(overArching < 5.0){
+				LeftFront->Set(-0.75);
+					LeftRear->Set(-0.75);
+					RightFront->Set(0.75);
+					RightRear->Set(0.75);
+				}else if(overArching >= 5.0){
 					LeftFront->Set(0);
 					LeftRear->Set(0);
 					RightFront->Set(0);
@@ -78,35 +77,37 @@ void Drive::Auto(){
 			//Wait(100);
 
 			break;
-		case 2:
-			if(overArching < 2.5){
-				LeftFront->Set(1.0);
-				LeftRear->Set(1.0);
-				RightFront->Set(-1.0);
-				RightRear->Set(-1.0);
-				Wait(0.001);
-			}else if(overArching >= 2.5 && overArching <9){
-				LeftFront->Set(0);
-				LeftRear->Set(0);
-				RightFront->Set(0);
-				RightRear->Set(0);
-				Wait(0.0001);
-				AutoCondition=true;
-			}else if(overArching >= 9 && overArching <= 11){
-				LeftFront->Set(-1);
-				LeftRear->Set(-1);
-				RightFront->Set(1);
-				RightRear->Set(1);
-				Wait(0.0001);
-				AutoCondition=false;
-			}else {
-				LeftFront->Set(0);
-				LeftRear->Set(0);
-				RightFront->Set(0);
-				RightRear->Set(0);
-				Wait(0.0001);
-			}
-			break;
+	/*	case 2:
+								if(overArching < 5){
+									AutoCondition= true;
+									LeftFront->Set(0.0);
+									LeftRear->Set(0.0);
+									RightFront->Set(0.0);
+									RightRear->Set(0.0);
+									Wait(0.001);
+								}else if(overArching >= 5 && overArching <9){
+									AutoCondition=false;
+									LeftFront->Set(0.8);
+									LeftRear->Set(0.8);
+									RightFront->Set(-0.2);
+									RightRear->Set(-0.2);
+									Wait(0.0001);
+									AutoCondition=true;
+								}else if(overArching >= 9 && overArching <= 11){
+									LeftFront->Set(0.71);
+									LeftRear->Set(0.71);
+									RightFront->Set(-0.71);
+									RightRear->Set(-0.71);
+									Wait(0.0001);
+									AutoCondition=false;
+								}else {
+									LeftFront->Set(0);
+									LeftRear->Set(0);
+									RightFront->Set(0);
+									RightRear->Set(0);
+									Wait(0.0001);
+								}
+								break;*/
 		case 3:
 			if(overArching < 3.0){
 
@@ -123,6 +124,36 @@ void Drive::Auto(){
 				RightRear->Set(0);
 							}
 		break;
+		case 4:
+			if(overArching < 2.5){
+							LeftFront->Set(1.0);
+							LeftRear->Set(1.0);
+							RightFront->Set(-1.0);
+							RightRear->Set(-1.0);
+							Wait(0.001);
+						}else if(overArching >= 2.5 && overArching <9){
+							LeftFront->Set(0);
+							LeftRear->Set(0);
+							RightFront->Set(0);
+							RightRear->Set(0);
+							Wait(0.0001);
+							AutoCondition=true;
+						}else if(overArching >= 9 && overArching <= 11){
+							LeftFront->Set(-1);
+							LeftRear->Set(-1);
+							RightFront->Set(1);
+							RightRear->Set(1);
+							Wait(0.0001);
+							AutoCondition=false;
+						}else {
+							LeftFront->Set(0);
+							LeftRear->Set(0);
+							RightFront->Set(0);
+							RightRear->Set(0);
+							Wait(0.0001);
+						}
+						break;
+
 		default:
 			 printf("No Autonomous Chosen");
 			 break;

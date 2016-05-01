@@ -54,6 +54,8 @@ void XCaliber::AutonomousInit(){
 
 void XCaliber::AutonomousPeriodic(){
 	overArching = StopWatch->Get();
+	Wait(0.001);
+	printf("Total Overarching: %f", overArching);
 	myDrive->Auto();
 	myLauncher->Auto();
 
@@ -69,7 +71,7 @@ void XCaliber::TeleopPeriodic(){
 	myDrive->TeleOp();
 	myLauncher->TeleOp();
 	myLifter -> TeleOp();
-//	myCamera->TeleOp();  // Comment if you do not want multiple cams
+	myCamera->TeleOp();  // Comment if you do not want multiple cams
 
 }
 
